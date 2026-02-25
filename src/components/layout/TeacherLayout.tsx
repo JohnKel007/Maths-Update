@@ -3,7 +3,8 @@
 import { ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useSession, signOut } from 'next-auth/react'
+// LOGIN DISABLED TEMPORARILY — restore useSession and signOut to re-enable
+// import { useSession, signOut } from 'next-auth/react'
 import { useI18n } from '@/lib/i18n'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 
@@ -15,7 +16,8 @@ const teacherNav = [
 
 export function TeacherLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname()
-  const { data: session } = useSession()
+  // LOGIN DISABLED TEMPORARILY
+  // const { data: session } = useSession()
   const { t } = useI18n()
 
   return (
@@ -46,15 +48,7 @@ export function TeacherLayout({ children }: { children: ReactNode }) {
 
             <div className="flex items-center gap-3">
               <LanguageToggle />
-              <span className="text-sm text-gray-500 hidden sm:block">
-                {session?.user?.name}
-              </span>
-              <button
-                onClick={() => signOut({ callbackUrl: '/auth/signin' })}
-                className="text-sm text-gray-500 hover:text-gray-700 px-3 py-2"
-              >
-                {t('common.signOut')}
-              </button>
+              {/* LOGIN DISABLED TEMPORARILY — sign out button hidden */}
             </div>
           </div>
         </div>
