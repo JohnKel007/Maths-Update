@@ -1,0 +1,231 @@
+{
+  "common": {
+    "appName": "Ikigai Maths PhBL",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "next": "Next",
+    "previous": "Previous",
+    "delete": "Delete",
+    "edit": "Edit",
+    "export": "Export",
+    "exportPdf": "Export to PDF",
+    "search": "Search",
+    "filter": "Filter",
+    "submit": "Submit",
+    "back": "Back",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "required": "Required",
+    "optional": "Optional",
+    "language": "Language",
+    "spanish": "Spanish",
+    "english": "English",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "dashboard": "Dashboard",
+    "welcome": "Welcome"
+  },
+  "roles": {
+    "teacher": "Teacher",
+    "student": "Student",
+    "admin": "Administrator"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "signInTitle": "Sign in to Ikigai Maths",
+    "signInDescription": "Enter your credentials to access the platform",
+    "invalidCredentials": "Invalid email or password",
+    "welcomeBack": "Welcome back!"
+  },
+  "nav": {
+    "unitBuilder": "Unit Builder",
+    "phenomenonLibrary": "Phenomenon Library",
+    "studentWorkspace": "Workspace",
+    "portfolio": "Portfolio",
+    "classDashboard": "Class Dashboard",
+    "adminPanel": "Admin Panel"
+  },
+  "phases": {
+    "notice": "NOTICE",
+    "explore": "EXPLORE",
+    "investigate": "INVESTIGATE",
+    "construct": "CONSTRUCT",
+    "share": "SHARE & REFLECT"
+  },
+  "unitBuilder": {
+    "title": "Unit Builder",
+    "createNew": "Create New Unit",
+    "stages": {
+      "setup": "Unit Setup",
+      "phenomenon": "Phenomenon",
+      "mathsMapping": "Maths Mapping",
+      "drivingQuestion": "Driving Question",
+      "learningArc": "Learning Arc",
+      "digitalTools": "Digital Tools",
+      "assessment": "Assessment",
+      "facilitation": "Facilitation"
+    },
+    "setup": {
+      "unitTitle": "Unit Title",
+      "yearGroup": "Year Group",
+      "duration": "Approximate Duration",
+      "interdisciplinary": "Interdisciplinary Connections"
+    },
+    "phenomenon": {
+      "title": "Phenomenon Builder",
+      "statement": "Phenomenon Statement",
+      "whyItMatters": "Why it matters",
+      "studentQuestions": "Expected student questions",
+      "mathsDemanded": "Maths demanded",
+      "subjectLinks": "Subject links",
+      "experienceMethod": "How will students experience the phenomenon?",
+      "checklist": {
+        "title": "Phenomenon Design Checklist",
+        "observable": "Is it observable or experienceable?",
+        "generatesQuestions": "Does it generate questions naturally?",
+        "demandsMaths": "Does it demand maths to understand?",
+        "locallyRelevant": "Is it locally relevant?",
+        "appropriatelyComplex": "Is it appropriately complex?",
+        "interdisciplinary": "Is it interdisciplinary?",
+        "ageAppropriate": "Is it age-appropriate?"
+      },
+      "weakWarning": "⚠ This phenomenon meets fewer than 5 of 7 criteria. Consider revising to strengthen the unit."
+    },
+    "mathsMapping": {
+      "title": "Mathematical Mapping",
+      "strands": "Strands",
+      "skills": "Specific Skills",
+      "processes": "Mathematical Processes",
+      "cognitiveDemand": "Cognitive Demand",
+      "priorKnowledge": "Prior Knowledge Required",
+      "vocabulary": "Key Vocabulary",
+      "extension": "Extension Opportunities",
+      "cambridgeObjectives": "Cambridge Primary Objectives",
+      "strandOptions": {
+        "number": "Number",
+        "geometry": "Geometry & Measure",
+        "statistics": "Statistics",
+        "algebra": "Algebra",
+        "fractions": "Fractions, Decimals & Percentages"
+      },
+      "processOptions": {
+        "problemSolving": "Problem Solving",
+        "reasoning": "Reasoning",
+        "communicating": "Communicating",
+        "representing": "Representing",
+        "connecting": "Connecting"
+      },
+      "demandOptions": {
+        "procedural": "Procedural",
+        "conceptual": "Conceptual",
+        "both": "Both"
+      }
+    },
+    "drivingQuestion": {
+      "title": "Driving Question Designer",
+      "stemSelector": "Select Question Stem",
+      "customStem": "Custom Stem",
+      "candidate": "Candidate Question",
+      "addCandidate": "Add Candidate Question",
+      "testingMatrix": "Testing Matrix",
+      "criteria": {
+        "openEnded": "Open-ended",
+        "mathsRequired": "Maths Required",
+        "studentRelevance": "Student Relevance",
+        "locallyInvestigable": "Locally Investigable",
+        "realAudience": "Real Audience",
+        "extensionPotential": "Extension Potential"
+      },
+      "scores": {
+        "1": "Low",
+        "2": "Medium",
+        "3": "High"
+      },
+      "recommended": "✓ Recommended",
+      "selectAsMain": "Select as Main Question",
+      "stems": [
+        "How might we...",
+        "What is the best way to...",
+        "What would happen if...",
+        "How much / How many...",
+        "Is it fair that...",
+        "How can we measure...",
+        "How does ... compare to...",
+        "What is the pattern in..."
+      ]
+    }
+  },
+  "phenomenonLibrary": {
+    "title": "Phenomenon Library",
+    "searchPlaceholder": "Search phenomena...",
+    "filterByStrand": "Filter by strand",
+    "filterByAge": "Filter by age",
+    "filterByTag": "Filter by tag",
+    "useThisPhenomenon": "Use this Phenomenon",
+    "submitNew": "Submit New Phenomenon",
+    "pendingReview": "Pending Review",
+    "approved": "Approved",
+    "rating": "Rating",
+    "noResults": "No phenomena found matching the selected filters."
+  },
+  "assessment": {
+    "rubric": {
+      "developing": "Developing",
+      "achieving": "Achieving",
+      "exceeding": "Exceeding"
+    },
+    "types": {
+      "diagnostic": "Diagnostic",
+      "formative_maths": "Formative - Maths",
+      "formative_process": "Formative - Process",
+      "metacognitive_reflection": "Metacognitive Reflection",
+      "summative_maths": "Summative - Maths",
+      "summative_inquiry": "Summative - Inquiry",
+      "portfolio": "Portfolio"
+    }
+  },
+  "student": {
+    "workspace": {
+      "title": "My Workspace",
+      "currentPhase": "Current Phase",
+      "drivingQuestion": "Driving Question",
+      "notStarted": "Your teacher hasn't set up this phase yet. It will be ready soon!",
+      "phaseComplete": "Phase complete! Wait for your teacher to open the next phase."
+    },
+    "notice": {
+      "whatINoticed": "What I noticed",
+      "myQuestions": "My questions",
+      "classQuestions": "Class questions",
+      "addQuestion": "Add a question",
+      "starred": "Starred by teacher"
+    },
+    "explore": {
+      "miniLessons": "Mini Lessons",
+      "skillsPracticing": "Skills I'm practising",
+      "adaptivePractice": "Adaptive Practice"
+    },
+    "investigate": {
+      "teamRole": "My Team Role",
+      "dataCollection": "Data Collection",
+      "graphBuilder": "Graph Builder",
+      "findings": "Our Findings"
+    },
+    "construct": {
+      "ourAnswer": "Our Answer",
+      "evidenceBoard": "Evidence Board",
+      "mathJustification": "Mathematical Justification"
+    },
+    "reflect": {
+      "whatMathUsed": "What maths did you use, and why did you choose it?",
+      "whatDifferently": "What would you do differently?",
+      "whatSurprised": "What surprised you?",
+      "peerFeedback": "Peer Feedback",
+      "strength": "One strength",
+      "question": "One question",
+      "suggestion": "One suggestion"
+    }
+  }
+}

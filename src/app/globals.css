@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-notice: #F59E0B;
+    --color-explore: #10B981;
+    --color-investigate: #3B82F6;
+    --color-construct: #8B5CF6;
+    --color-share: #EC4899;
+  }
+
+  body {
+    @apply antialiased text-gray-900 bg-gray-50;
+  }
+
+  /* Ensure minimum touch targets for young learners */
+  .student-view button,
+  .student-view a,
+  .student-view input,
+  .student-view select,
+  .student-view textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Student view uses larger text */
+  .student-view {
+    @apply text-lg;
+  }
+}
+
+@layer components {
+  .phase-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white;
+  }
+
+  .phase-badge-notice { @apply bg-amber-500; }
+  .phase-badge-explore { @apply bg-emerald-500; }
+  .phase-badge-investigate { @apply bg-blue-500; }
+  .phase-badge-construct { @apply bg-violet-500; }
+  .phase-badge-share { @apply bg-pink-500; }
+
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
+  }
+
+  .card-hover {
+    @apply card transition-shadow hover:shadow-md;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg bg-ikigai-primary text-white font-medium
+           hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg bg-white text-gray-700 font-medium
+           border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200
+           outline-none transition-colors text-base;
+  }
+
+  .label-text {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+}

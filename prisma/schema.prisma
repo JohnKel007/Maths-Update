@@ -1,0 +1,285 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  teacher
+  student
+  admin
+}
+
+enum UnitStatus {
+  draft
+  active
+  complete
+}
+
+enum CognitiveDemand {
+  procedural
+  conceptual
+  both
+}
+
+enum AssessmentType {
+  diagnostic
+  formative_maths
+  formative_process
+  metacognitive_reflection
+  summative_maths
+  summative_inquiry
+  portfolio
+}
+
+enum RubricLevel {
+  developing
+  achieving
+  exceeding
+}
+
+model User {
+  id                String   @id @default(cuid())
+  name              String
+  email             String   @unique
+  passwordHash      String
+  role              Role
+  languagePreference String  @default("es")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Teacher relations
+  units             Unit[]
+  assessmentRecords AssessmentRecord[]
+
+  // Student relations
+  studentPhaseEntries StudentPhaseEntry[]
+  portfolioItems      PortfolioItem[]
+
+  // Phenomenon library
+  submittedPhenomena PhenomenonLibrary[] @relation("SubmittedBy")
+  phenomenonRatings  PhenomenonRating[]
+
+  @@map("users")
+}
+
+model Unit {
+  id          String     @id @default(cuid())
+  teacherId   String
+  title       String
+  yearGroup   String
+  duration    String
+  interdisciplinaryConnections String?
+  status      UnitStatus @default(draft)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  teacher     User       @relation(fields: [teacherId], references: [id])
+
+  phenomenon       Phenomenon?
+  mathsMapping     MathsMapping?
+  drivingQuestion  DrivingQuestion?
+  learningArcs     LearningArc[]
+  toolAssignments  ToolAssignment[]
+  assessmentPlans  AssessmentPlan[]
+  facilitationPlan FacilitationPlan?
+
+  studentPhaseEntries StudentPhaseEntry[]
+  assessmentRecords   AssessmentRecord[]
+  portfolioItems      PortfolioItem[]
+
+  @@map("units")
+}
+
+model Phenomenon {
+  id               String  @id @default(cuid())
+  unitId           String  @unique
+  statement        String
+  localRelevance   String?
+  whyItMatters     String?
+  studentQuestions String?
+  mathsDemanded    String?
+  subjectLinks     String?
+  experienceMethod String?
+
+  // Checklist scores (7 criteria)
+  isObservable       Boolean @default(false)
+  generatesQuestions Boolean @default(false)
+  demandsMaths       Boolean @default(false)
+  locallyRelevant    Boolean @default(false)
+  appropriatelyComplex Boolean @default(false)
+  isInterdisciplinary Boolean @default(false)
+  isAgeAppropriate   Boolean @default(false)
+
+  unit Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  @@map("phenomena")
+}
+
+model MathsMapping {
+  id                 String         @id @default(cuid())
+  unitId             String         @unique
+  strands            String[]
+  skills             String[]
+  processes          String[]
+  cognitiveDemand    CognitiveDemand @default(both)
+  priorKnowledge     String?
+  vocabulary         String[]
+  extension          String?
+  cambridgeObjectives String?
+
+  unit Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  @@map("maths_mappings")
+}
+
+model DrivingQuestion {
+  id               String @id @default(cuid())
+  unitId           String @unique
+  candidates       Json   // Array of { question, scores: { openEnded, mathsRequired, studentRelevance, locallyInvestigable, realAudience, extensionPotential } }
+  selectedQuestion String?
+  customStem       String?
+
+  unit Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  @@map("driving_questions")
+}
+
+model LearningArc {
+  id           String @id @default(cuid())
+  unitId       String
+  phase        Int    // 1=NOTICE, 2=EXPLORE, 3=INVESTIGATE, 4=CONSTRUCT, 5=SHARE
+  planText     String?
+  weeklyRhythm Json?  // { days: [{ day, activityType, toolRole }] }
+
+  unit Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  @@unique([unitId, phase])
+  @@map("learning_arcs")
+}
+
+model ToolAssignment {
+  id       String @id @default(cuid())
+  unitId   String
+  toolName String
+  phase    Int
+  purpose  String?
+
+  unit Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  @@map("tool_assignments")
+}
+
+model AssessmentPlan {
+  id                  String         @id @default(cuid())
+  unitId              String
+  type                AssessmentType
+  evidenceMethod      String?
+  rubricCustomisation Json?
+
+  unit Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  @@unique([unitId, type])
+  @@map("assessment_plans")
+}
+
+model FacilitationPlan {
+  id                 String  @id @default(cuid())
+  unitId             String  @unique
+  challenges         String?
+  revertRisks        String?
+  phase3Questions    String?
+  dashboardStrategy  String?
+  overwhelmedSupport String?
+  advancedSupport    String?
+
+  unit Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  @@map("facilitation_plans")
+}
+
+model StudentPhaseEntry {
+  id          String   @id @default(cuid())
+  studentId   String
+  unitId      String
+  phase       Int
+  content     Json
+  submittedAt DateTime @default(now())
+
+  student User @relation(fields: [studentId], references: [id])
+  unit    Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  @@map("student_phase_entries")
+}
+
+model AssessmentRecord {
+  id           String         @id @default(cuid())
+  teacherId    String
+  studentId    String
+  unitId       String
+  type         AssessmentType
+  rubricScores Json?
+  notes        String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  teacher User @relation(fields: [teacherId], references: [id])
+  unit    Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  @@map("assessment_records")
+}
+
+model PortfolioItem {
+  id                String   @id @default(cuid())
+  studentId         String
+  unitId            String
+  phase             Int?
+  contentType       String   // text, image, link
+  content           String
+  teacherAnnotation String?
+  createdAt         DateTime @default(now())
+
+  student User @relation(fields: [studentId], references: [id])
+  unit    Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  @@map("portfolio_items")
+}
+
+model PhenomenonLibrary {
+  id                    String   @id @default(cuid())
+  title                 String
+  statement             String
+  tags                  String[]
+  strands               String[]
+  skills                String[]
+  drivingQuestions      String[]
+  ageRange              String
+  interdisciplinary     String[]
+  usedInUnit            Boolean  @default(false)
+  linkedUnitId          String?
+  submittedById         String?
+  approved              Boolean  @default(false)
+  createdAt             DateTime @default(now())
+
+  submittedBy User?              @relation("SubmittedBy", fields: [submittedById], references: [id])
+  ratings     PhenomenonRating[]
+
+  @@map("phenomenon_library")
+}
+
+model PhenomenonRating {
+  id           String @id @default(cuid())
+  phenomenonId String
+  userId       String
+  stars        Int    // 1-5
+  comment      String?
+
+  phenomenon PhenomenonLibrary @relation(fields: [phenomenonId], references: [id], onDelete: Cascade)
+  user       User              @relation(fields: [userId], references: [id])
+
+  @@unique([phenomenonId, userId])
+  @@map("phenomenon_ratings")
+}
