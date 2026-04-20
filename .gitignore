@@ -1,32 +1,13 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
+node_modules
 /build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-
-# local env files
-.env*.local
+.cache
 .env
+.env.local
 
-# vercel
-.vercel
+# Local SQLite database and WAL/SHM files
+/data/*.db
+/data/*.db-journal
+/data/*.db-wal
+/data/*.db-shm
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+.DS_Store
